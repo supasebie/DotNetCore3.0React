@@ -21,13 +21,34 @@ namespace API
             Configuration = configuration;
         }
 
+        // readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //Allow specific origin based on request domain. Blanket statement.
+            // services.AddCors(options =>
+            // {
+            //     options.AddPolicy(MyAllowSpecificOrigins, 
+            //     builder => 
+            //     {
+            //         builder.WithOrigins("http://localhost:3000");
+            //     });
+            // });
+
             services.AddDbContext<DataContext>(opt => {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddCors(opt => 
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                });
             });
 
             services.AddControllers();
@@ -38,10 +59,27 @@ namespace API
         {
             if (env.IsDevelopment())
             {
+            {
                 app.UseDeveloperExceptionPage();
+            }
+            
+            app.UseRouting();
+ 
+            app.UseCors();
+            
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.
+                endpoints.MapControllers().RequireCors("CorsPolicy");
+            });
             }
 
             // app.UseHttpsRedirection();
+
+            // Registered for blanket CORS origin
+            // app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

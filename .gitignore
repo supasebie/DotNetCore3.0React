@@ -5,4 +5,7 @@ obj
 wwwroot
 publish
 settings.json
-appsettings.json
+node_modules
+/node_modules
+*node_modules/*
+node_modules/

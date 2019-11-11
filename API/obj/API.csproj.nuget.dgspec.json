@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\api\\API.csproj": {}
+    "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\api\\API.csproj": {
+    "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\api\\API.csproj",
+        "projectPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Sebastian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\api\\obj\\",
+        "outputPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
