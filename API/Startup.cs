@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Activities;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 // using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +40,7 @@ namespace API
             //         builder.WithOrigins("http://localhost:3000");
             //     });
             // });
-
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddDbContext<DataContext>(opt => {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
@@ -51,6 +53,7 @@ namespace API
                 });
             });
 
+            
             services.AddControllers();
         }
 

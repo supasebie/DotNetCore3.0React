@@ -46,3 +46,5 @@ C:\Users\Sebastian\WebDevelopment\CoreReact\api\obj\Debug\netcoreapp3.0\API.Razo
 C:\Users\Sebastian\WebDevelopment\CoreReact\api\obj\Debug\netcoreapp3.0\API.csproj.CopyComplete
 C:\Users\Sebastian\WebDevelopment\CoreReact\api\obj\Debug\netcoreapp3.0\API.dll
 C:\Users\Sebastian\WebDevelopment\CoreReact\api\obj\Debug\netcoreapp3.0\API.pdb
+C:\Users\Sebastian\WebDevelopment\CoreReact\API\bin\Debug\netcoreapp3.0\MediatR.dll
+C:\Users\Sebastian\WebDevelopment\CoreReact\API\bin\Debug\netcoreapp3.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

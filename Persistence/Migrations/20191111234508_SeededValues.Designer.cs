@@ -8,8 +8,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191109114141_SeedValalues")]
-    partial class SeedValalues
+    [Migration("20191111234508_SeededValues")]
+    partial class SeededValues
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0");
 
-            modelBuilder.Entity("Persistence.Value", b =>
+            modelBuilder.Entity("Domain.Value", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
