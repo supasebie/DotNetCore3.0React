@@ -8,23 +8,23 @@
     ".NETStandard,Version=v2.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Sebastian\\.nuget\\packages\\": {},
+    "C:\\Users\\SupaSebie\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\SupaSebie\\WebDevelopment\\.NetCore3.0React\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\Domain\\Domain.csproj",
-      "packagesPath": "C:\\Users\\Sebastian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sebastian\\WebDevelopment\\CoreReact\\Domain\\obj\\",
+      "projectPath": "C:\\Users\\SupaSebie\\WebDevelopment\\.NetCore3.0React\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\SupaSebie\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SupaSebie\\WebDevelopment\\.NetCore3.0React\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Sebastian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SupaSebie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

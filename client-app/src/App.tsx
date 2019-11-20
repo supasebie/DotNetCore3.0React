@@ -25,11 +25,6 @@ class App extends Component{
           <Icon name="users" />
           <Header.Content>CoreReact</Header.Content>
         </Header>
-        <List>
-          <List.Item>Apples</List.Item>
-          <List.Item>Pears</List.Item>
-          <List.Item>Oranges</List.Item>
-        </List>
         <ul>
           {this.state.values.map((value: any) => (
             <li key={value.id}>{value.name}</li>
