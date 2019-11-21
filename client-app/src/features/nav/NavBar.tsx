@@ -1,7 +1,11 @@
 import React from "react";
 import { Menu, Container, Button } from "semantic-ui-react";
 
-const NavBar = () => {
+interface IProps {
+  openCreateForm: () => void;
+}
+
+const NavBar: React.FC<IProps> = ({openCreateForm}) => {
   return (
     <Menu fixed="top" inverted>
       <Container>
@@ -11,7 +15,7 @@ const NavBar = () => {
         </Menu.Item>
         <Menu.Item name="Activities" />
         <Menu.Item name="friends">
-          <Button positive content='Create Activity'/>
+          <Button onClick={openCreateForm} positive content='Create Activity'/>
         </Menu.Item>
       </Container>
     </Menu>

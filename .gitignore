@@ -21,6 +21,7 @@ obj*
 [Dd]ebug/
 [Bb]in/
 [Oo]bj/
+[Oo]bj/*
 
 .DS_Store
 
