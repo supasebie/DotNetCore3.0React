@@ -41,11 +41,12 @@ namespace API
             //     });
             // });
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddDbContext<DataContext>(opt => {
+            services.AddDbContext<DataContext>(opt =>
+            {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddCors(opt => 
+            services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
@@ -53,7 +54,7 @@ namespace API
                 });
             });
 
-            
+
             services.AddControllers();
         }
 
@@ -62,19 +63,14 @@ namespace API
         {
             if (env.IsDevelopment())
             {
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            
-            app.UseRouting();
- 
-            app.UseCors();
-            
-            app.UseEndpoints(endpoints =>
-            {
-                //endpoints.
-                endpoints.MapControllers().RequireCors("CorsPolicy");
-            });
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+
+                app.UseRouting();
+
+                app.UseCors("CorsPolicy");
+
             }
 
             // app.UseHttpsRedirection();
