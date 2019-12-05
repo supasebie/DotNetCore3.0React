@@ -11,7 +11,7 @@ interface IProps {
 const ActivityDetails: React.FC<IProps> = ({
   activity,
   setEditMode,
-  setSelectedActivity
+  setSelectedActivity,
 }) => {
   return (
     <Card fluid>

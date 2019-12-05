@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, SyntheticEvent } from "react";
+import LoadingComponent from './LoadingComponent'
 import { Container } from "semantic-ui-react";
 import { IActivity } from "../models/activity";
 import NavBar from "../../features/nav/NavBar";
@@ -12,6 +13,9 @@ const App = () => {
   );
 
   const [editMode, setEditMode] = useState(false);
+  const[loading, setLoading] = useState(true);
+  const[submitting, setSubmitting] = useState(false);
+  const[target, setTarget] = useState('');
 
   const handleSelectActivity = (id: string) => {
     setSelectedActivity(activities.filter(a => a.id === id)[0]);
@@ -24,25 +28,30 @@ const App = () => {
   };
 
   const handleCreateActivity = (activity: IActivity) => {
+    setSubmitting(true);
     agent.Activities.create(activity).then(() => {
       setActivities([...activities, activity]);
       setSelectedActivity(activity);
       setEditMode(false);
-    })
-  }
+    }).then(() => setSubmitting(false))
+  };
+
 
   const handleEditActivity = (activity: IActivity) => {
+    setSubmitting(true);
     agent.Activities.update(activity).then(() => {
       setActivities([...activities.filter(a => a.id !== activity.id), activity]);
       setSelectedActivity(activity);
       setEditMode(false);
-    })
+    }).then(() => setSubmitting(false))
   };
 
-  const handleDeleteActivity = (id: string) => {
+  const handleDeleteActivity = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
+    setSubmitting(true);
+    setTarget(event.currentTarget.name);
     agent.Activities.delete(id).then(() => {
       setActivities([...activities.filter(a => a.id !== id)]);
-    })
+    }).then(() => setSubmitting(false))
   };
 
   useEffect(() => {
@@ -53,8 +62,10 @@ const App = () => {
         activities.push(activity);
       });
       setActivities(activities);
-    });
+    }).then(() => setLoading(false));
   }, []);
+
+  if (loading) return <LoadingComponent content='Loading activities...' />
 
   return (
     <Fragment>
@@ -70,6 +81,8 @@ const App = () => {
           createActivity={handleCreateActivity}
           editActivity={handleEditActivity}
           deleteActivity={handleDeleteActivity}
+          target={target}
+          submitting={submitting}
         />
       </Container>
     </Fragment>
