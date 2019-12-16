@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+    api:
+        build: ./corewebapi
+        container_name: api
+        restart: on-failure
+        ports:
+        - "5000:80"
+        command: ["dotnet", "api.dll"]
+    
+    ui:
+        build: ./client-app
+        container_name: corereact
+        restart: on-failure
+        ports:
+        - '5001:3000'
+        environment:
+        - NODE_ENV=development
+        - CHOKIDAR_USEPOLLING=true
+        depends_on:
+        - api
+        volumes:        
+        - ./react_ui/src:/app/src
+        - '/app/node_modules'
