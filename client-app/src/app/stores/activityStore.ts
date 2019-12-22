@@ -120,8 +120,8 @@ export class ActivityStore {
       } catch (error) {
         runInAction("error getting individual activity", () => {
           this.loadingInitial = false;
-          console.log(error);
         });
+        console.log(error);
       }
     }
   };

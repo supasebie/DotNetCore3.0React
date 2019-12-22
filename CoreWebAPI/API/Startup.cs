@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Application.Activities;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-// using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.Activities;
+using MediatR;
+using FluentValidation.AspNetCore;
+using API.Middleware;
+using Microsoft.Extensions.Hosting;
+
 namespace API
 {
     public class Startup
@@ -23,70 +19,49 @@ namespace API
             Configuration = configuration;
         }
 
-        // readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-            //Allow specific origin based on request domain. Blanket statement.
-            // services.AddCors(options =>
-            // {
-            //     options.AddPolicy(MyAllowSpecificOrigins, 
-            //     builder => 
-            //     {
-            //         builder.WithOrigins("http://localhost:3000");
-            //     });
-            // });
-            services.AddMediatR(typeof(List.Handler).Assembly);
+        public void ConfigureDevelopmentServices(IServiceCollection services) {
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-
-            services.AddCors(opt =>
-            {
-                opt.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000",
-                    "http://localhost:3001");
+            ConfigureServices(services);
+        }
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsPolicy", policy =>{
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .WithOrigins("http://localhost:3000");
                 });
             });
-
-
-            services.AddControllers();
+            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddSignalR();
+            services.AddControllers()
+                .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Create>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
             {
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-
-                app.UseRouting();
-
-                app.UseCors("CorsPolicy");
-
+                //app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
-
-            // Registered for blanket CORS origin
-            // app.UseCors(MyAllowSpecificOrigins);
-
-            app.UseCors("CorsPolicy");
-
             app.UseRouting();
-
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseCors("CorsPolicy");
+            app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
         }
