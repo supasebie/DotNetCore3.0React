@@ -21,6 +21,8 @@
     "experimentalDecorators": true
   },
   "include": [
-    "src", "public/features"
+    "src",
+    "./typings-custom/**/*.ts",
+    "./typings-custom/*.ts"
   ]
 }
