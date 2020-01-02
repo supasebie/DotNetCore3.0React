@@ -1,8 +1,14 @@
-import React from "react";
-import { Container, Segment, Header, Image, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React, { useContext, Fragment } from 'react';
+import { Container, Segment, Header, Image, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { RootStoreContext } from '../../app/stores/rootStore';
+import LoginForm from '../user/LoginForm';
+import RegisterForm from '../user/RegisterForm';
 
 const HomePage = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { isLoggedIn, user } = rootStore.userStore;
+  const { openModal } = rootStore.modalStore;
   return (
     <Segment inverted textAlign="center" vertical className="masthead">
       <Container text>
@@ -15,10 +21,32 @@ const HomePage = () => {
           />
           Sebastian's .Net Core 3.0 React Application!
         </Header>
-        <Header as="h2" inverted content="Featuring EFCore, Axios, Mobx, Semantic UI, CQRS + Mediator and more. " />
-        <Button as={Link} to="/activities" size="huge" inverted>
-          Take me to the activities!
-        </Button>
+        {isLoggedIn && user ? (
+          <Fragment>
+            <Header
+              as="h2"
+              inverted
+              content={`Hey, ${user.displayName}! Welcome back to my activity project`}
+            />
+            <Button as={Link} to="/activities" size="huge" inverted>
+              Take me to the activities!
+            </Button>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Header
+              as="h2"
+              inverted
+              content="Featuring EFCore, Axios, Mobx, Semantic UI, CQRS + Mediator and more. "
+            />
+            <Button onClick={() => openModal(<LoginForm />)} size="huge" inverted>
+              Login
+            </Button>
+            <Button onClick={() => openModal(<RegisterForm />)} size="huge" inverted>
+              Register
+            </Button>
+          </Fragment>
+        )}
       </Container>
     </Segment>
   );
